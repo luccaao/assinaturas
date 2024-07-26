@@ -1,0 +1,25 @@
+<section>
+  <div class="card-container">
+    <div class="background-img">
+      <img src="../../../assets/signature@2x.png" alt="">
+    </div>
+    <form [formGroup]="cpfForm" (ngSubmit)="onSubmit()">
+      <h1>Sistema de gestão de assinaturas</h1>
+      <div class="area-input">
+        <span>Busque pelo CPF do cliente</span>
+        <div class="input-container">
+          <input 
+            formControlName="cpf"
+            type="text"
+            placeholder="Digite o CPF"
+            (blur)="onBlur()"
+            (focus)="onFocus()"
+            [class.invalid]="isInvalid"
+          />
+          <i *ngIf="isInvalid" class="fas fa-exclamation-circle error-icon"></i>
+        </div>
+      </div>
+      <button type="submit" [disabled]="cpf?.invalid">Buscar</button>
+    </form>
+  </div>
+</section>

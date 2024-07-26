@@ -1,0 +1,117 @@
+<app-header [headerText]="dynamicHeaderText"></app-header>
+
+<div class="container">
+  <section>
+    <div class="card-container">
+      <div style="display: flex; align-items: center; gap: 30px">
+        <figure>
+          <img src="../../../assets/icon-user.svg" alt="" />
+        </figure>
+
+        <div style="display: flex; flex-direction: column">
+          <h1>Nome</h1>
+          <span style="margin-bottom: 10px">Nome do Cliente</span>
+          <h1>Email</h1>
+          <span>contatoemail.com.br</span>
+        </div>
+      </div>
+
+      <div>
+        <div style="display: flex; flex-direction: column">
+          <h1>CPF</h1>
+          <span style="margin-bottom: 10px">000.000.000-00</span>
+          <h1>E-Telefone</h1>
+          <span>(00) 00000-0000</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="area-pendentes-assinados">
+        <button 
+          [class.active]="selectedButton === 'pendentes'" 
+          (click)="selectButton('pendentes')">
+          <span>Pendentes</span>
+        </button>
+        <button 
+          [class.active]="selectedButton === 'assinados'" 
+          (click)="selectButton('assinados')">
+          <span>Assinados</span>
+        </button>
+      </div>
+
+      <div class="documentos">
+        <div *ngIf="selectedButton === 'pendentes'">
+          <div class="documento-card">
+            <div class="documento-info">
+
+              <div  style="display: flex; flex-direction: column;">
+                  <h1>Nº documento</h1>
+                  <span>000000000</span>
+              </div>
+
+              <div style="display: flex; flex-direction: column;">
+                  <h1>Assunto</h1>
+                  <span>Assunto do <br> documento</span>
+              </div>
+
+            </div>
+            <button class="assinar-btn" (click)="openModal()"><img src="../../../assets/icon-assinatura.svg" alt=""> Assinar</button>
+          </div>
+          <!-- Repita o bloco acima para cada documento pendente -->
+        </div>
+        <div *ngIf="selectedButton === 'assinados'">
+            <div class="documento-card">
+                <div class="documento-info">
+    
+                  <div  style="display: flex; flex-direction: column;">
+                      <h1>Nº documento</h1>
+                      <span>120540000</span>
+                  </div>
+    
+                  <div style="display: flex; flex-direction: column;">
+                      <h1>Assunto</h1>
+                      <span>Assunto do <br> documento</span>
+                  </div>
+    
+                </div>
+                <button class="assinado-btn"><img style="width: 19px; height: 19px;" src="../../../assets/icon-assinatura1.png" alt=""> <p style="color: #15803D; ">Assinado</p></button>
+              </div>
+            <div class="documento-card">
+                <div class="documento-info">
+    
+                  <div  style="display: flex; flex-direction: column;">
+                      <h1>Nº documento</h1>
+                      <span>120540000</span>
+                  </div>
+    
+                  <div style="display: flex; flex-direction: column;">
+                      <h1>Assunto</h1>
+                      <span>Assunto do <br> documento</span>
+                  </div>
+    
+                </div>
+                <button class="assinado-btn"><img style="width: 19px; height: 19px;" src="../../../assets/icon-assinatura1.png" alt=""> <p style="color: #15803D; ">Assinado</p></button>
+              </div>
+        </div>
+      </div>
+
+
+  </section>
+
+  <app-modal [show]="showModal" (close)="closeModal()">
+    <div style="position: relative; flex-direction: column; display: flex; justify-content: center; align-items: center; height: 100%;">
+        <div style="display: flex; flex-direction: column;">
+            <figure class="figureModal" style="position: absolute;">
+            <img style="width: 50px; height: 50px;" src="../../../assets/signature@2x.png" alt="">
+            </figure>
+            <h1 style="color: #1F2937; text-align: center; font-size: 24px; font-weight: bold; ">Documento assinado <br> com sucesso</h1>
+            <button class="btn-docs">Ver documentos</button>
+        </div>
+    </div>
+  </app-modal>
+
+
+
+
+  
+</div>
