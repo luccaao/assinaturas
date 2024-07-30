@@ -100,12 +100,16 @@
 
   <app-modal [show]="showModal" (close)="closeModal()">
     <div style="position: relative; flex-direction: column; display: flex; justify-content: center; align-items: center; height: 100%;">
-        <div style="display: flex; flex-direction: column;">
+        <div style=" height: 80%;" >
             <figure class="figureModal" style="position: absolute;">
             <img style="width: 50px; height: 50px;" src="../../../assets/signature@2x.png" alt="">
             </figure>
-            <h1 style="color: #1F2937; text-align: center; font-size: 24px; font-weight: bold; ">Documento assinado <br> com sucesso</h1>
-            <button class="btn-docs">Ver documentos</button>
+
+            <div style="display: flex; flex-direction: column; height: 100%; gap: 30px; justify-content: end;">
+              <h1  style="color: #1F2937; text-align: center; font-size: 24px; font-weight: bold;">Documento assinado <br> com sucesso</h1>
+              <button class="btn-docs">Ver documentos</button>
+            </div>
+
         </div>
     </div>
   </app-modal>

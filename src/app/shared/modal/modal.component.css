@@ -11,21 +11,29 @@
     overflow: auto;
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
   }
   
   .modal-content {
     background-color: #ffff;
+    position: relative;
     border: 1px solid #888;
     width: 432px; 
     height: 237px;
     border-radius: 20px;
   }
-  
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+
+  .modal-content span {
+    background-color: #3B82F6;
+    color: #ffffff;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: -45px;
+    border-radius: 10px;
+    height: 34px;
+    width: 34px;
   }
   
   .close:hover,

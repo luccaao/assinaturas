@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AutenticacaoService } from '../../services/autenticacao.service';
 
 @Component({
   selector: 'app-login-cpf',
@@ -14,10 +15,20 @@ export class LoginCPFComponent {
   cpfForm: FormGroup;
   isInvalid: boolean = false; // Flag para controlar o estado de invalidez
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private auth: AutenticacaoService) {
     this.cpfForm = this.fb.group({
       cpf: ['', [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$|^\d{11}$/)]]
     });
+  }
+
+  ngOnInit() {
+     this.auth.getTokens().subscribe(data => {
+       console.log(data);
+    });
+
+    
+    
+
   }
 
   onSubmit() {
@@ -35,7 +46,7 @@ export class LoginCPFComponent {
   onBlur() {
     const cpfControl = this.cpfForm.get('cpf');
     if (cpfControl) {
-      const cpfValue = cpfControl.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+      const cpfValue = cpfControl.value.replace(/\D/g, ''); 
       if (!this.validarCPF(cpfValue)) {
         this.setInvalidState();
       } else {
@@ -48,7 +59,7 @@ export class LoginCPFComponent {
     const cpfControl = this.cpfForm.get('cpf');
     if (cpfControl && cpfControl.value === 'Entrada Inválida') {
       cpfControl.setValue('');
-      this.isInvalid = false; // Reseta a flag de invalidez
+      this.isInvalid = false; 
     }
   }
 
@@ -56,7 +67,7 @@ export class LoginCPFComponent {
     const cpfControl = this.cpfForm.get('cpf');
     if (cpfControl) {
       cpfControl.setValue('Entrada Inválida');
-      this.isInvalid = true; // Define a flag de invalidez
+      this.isInvalid = true; 
     }
   }
 
@@ -103,4 +114,6 @@ export class LoginCPFComponent {
   get cpf() {
     return this.cpfForm.get('cpf');
   }
+
+
 }

@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://econnects-h.jelastic.saveincloud.net",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
