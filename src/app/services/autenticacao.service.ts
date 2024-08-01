@@ -49,7 +49,7 @@ export class AutenticacaoService {
         .set('data_inicio', '2024-07-01')
         .set('data_fim', '2024-08-01');
 
-    return this.httpClient.post<any>(`/api/apolice/consulta`, params.toString(), { headers }).pipe(
+    return this.httpClient.post<any>(`https://sistema-h.neobs.com.br/api/apolice/consulta`, params.toString(), { headers }).pipe(
         catchError(this.handleError)
     );
 }
