@@ -26,8 +26,7 @@ export class LoginCPFComponent {
        console.log(data);
     });
 
-    
-    
+   
 
   }
 
@@ -36,7 +35,10 @@ export class LoginCPFComponent {
     if (cpfControl && this.validarCPF(cpfControl.value.replace(/\D/g, ''))) {
       console.log('CPF válido:', cpfControl.value);
       this.isInvalid = false;
-      this.router.navigate(['/gestao-assinatura']);
+      this.auth.apolices(cpfControl.value).subscribe(data => {
+        
+        this.router.navigate(['/gestao-assinatura']);
+      });
 
     } else {
       this.setInvalidState();

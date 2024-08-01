@@ -11,4 +11,5 @@ import { HeaderComponent } from '../../shared/header/header.component';
 export class ContratoComponent {
 
   dynamicHeaderText = 'Contrato';
+  caminho = '/gestao-assinatura';
 }

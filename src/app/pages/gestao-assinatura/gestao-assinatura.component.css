@@ -8,7 +8,7 @@
     }
   
     section {
-      width: 80%;
+      width: 90%;
     }
   
     .card-container {
@@ -236,10 +236,6 @@
     .btn-docs:hover {
         background-color: #2A40DE;
     }
-
-
-
-
 
   }
   
