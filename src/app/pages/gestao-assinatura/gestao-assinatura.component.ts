@@ -5,6 +5,7 @@ import { ModalComponent } from '../../shared/modal/modal.component';
 import { GoogleDriveService } from '../../services/google-drive.service';
 import { RouterLink } from '@angular/router';
 import { AutenticacaoService } from '../../services/autenticacao.service';
+import { SkeletonModule } from 'primeng/skeleton';
 
 interface Apolice {
   nome: string;
@@ -32,7 +33,7 @@ interface DadosCliente {
 @Component({
   selector: 'app-gestao-assinatura',
   standalone: true,
-  imports: [HeaderComponent, CommonModule, ModalComponent, RouterLink],
+  imports: [HeaderComponent, CommonModule, ModalComponent, RouterLink, SkeletonModule],
   templateUrl: './gestao-assinatura.component.html',
   styleUrl: './gestao-assinatura.component.css'
 })
@@ -40,25 +41,18 @@ export class GestaoAssinaturaComponent {
   
   dynamicHeaderText = 'Gestão de Assinaturas';
   caminho = '/login-cpf';
+  dadosCliente!: DadosCliente[];
+  dadosDetalhados!: Apolice[];
+  selectedButton: string = 'pendentes';
+  showModal: boolean = false;
+  isLoading: boolean = true; // Flag to indicate loading state
 
-  dadosCliente!: DadosCliente[]  
-
-  dadosDetalhados! : Apolice[]
-   
-  
-
-  selectedButton: string = 'pendentes'; // Define o botão inicial como 'pendentes'
-
-  showModal: boolean = false; // Flag para controlar a exibição do modal
-
-  constructor (private driveService: GoogleDriveService, private auth: AutenticacaoService) {}
+  constructor(private driveService: GoogleDriveService, private auth: AutenticacaoService) {}
 
   variables = {
     var1 : '',
     var2 : '',
   };
-
- 
 
   selectButton(button: string) {
     this.selectedButton = button;
@@ -73,14 +67,13 @@ export class GestaoAssinaturaComponent {
     this.showModal = false;
   }
 
- 
   ngOnInit(): void {
     this.loadGoogleApis();
-    
+
     this.auth.apolices('86352055532').subscribe(data => {
       this.dadosCliente = data.dados; 
+      this.isLoading = false; // Set loading to false once data is loaded
       console.log(this.dadosCliente);    
-      
     });
   }
 

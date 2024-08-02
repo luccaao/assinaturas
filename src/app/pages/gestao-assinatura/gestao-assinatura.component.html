@@ -7,115 +7,116 @@
         <img src="../../../assets/icon-user.svg" alt="" />
       </figure>
       <div style="display: flex; align-items: center; gap: 30px">
-
         <div class="conteudo" style="display: flex; flex-direction: column">
           <h1>Nome</h1>
-          <span style="padding-top: 6px; padding-bottom: 6px;">{{dadosCliente[0].apolice[0].nome}}</span>
+          <span style="padding-top: 6px; padding-bottom: 6px;">
+            <ng-container *ngIf="!isLoading; else skeletonLoading">{{dadosCliente[0].apolice[0].nome}}</ng-container>
+            <ng-template #skeletonLoading>
+              <p-skeleton height="1.5rem" styleClass="mb-2"></p-skeleton>
+            </ng-template>
+          </span>
           <h1>Email</h1>
-          <span style="padding-top: 6px; padding-bottom: 6px;">{{dadosCliente[0].apolice[0].email}}</span>
+          <span style="padding-top: 6px; padding-bottom: 6px;">
+            <ng-container *ngIf="!isLoading; else skeletonLoading">{{dadosCliente[0].apolice[0].email}}</ng-container>
+            <ng-template #skeletonLoading>
+              <p-skeleton width="10rem" height="1.5rem" styleClass="mb-2"></p-skeleton>
+            </ng-template>
+          </span>
         </div>
       </div>
-
       <div>
         <div class="conteudo" style="display: flex; flex-direction: column;">
           <h1>CPF</h1>
-          <span style="padding-top: 6px; padding-bottom: 6px;">{{formatCPF(dadosCliente[0].apolice[0].cnpj_cpf)}}</span>
+          <span style="padding-top: 6px; padding-bottom: 6px;">
+            <ng-container *ngIf="!isLoading; else skeletonLoading">{{formatCPF(dadosCliente[0].apolice[0].cnpj_cpf)}}</ng-container>
+            <ng-template #skeletonLoading>
+              <p-skeleton width="7rem" height="1.5rem" styleClass="mb-2"></p-skeleton>
+            </ng-template>
+          </span>
           <h1>E-Telefone</h1>
-          <span style="padding-top: 6px; padding-bottom: 6px;">{{formatPhoneNumber(dadosCliente[0].apolice[0].contato_telefone)}}</span>
+          <span style="padding-top: 6px; padding-bottom: 6px;">
+            <ng-container *ngIf="!isLoading; else skeletonLoading">{{formatPhoneNumber(dadosCliente[0].apolice[0].contato_telefone)}}</ng-container>
+            <ng-template #skeletonLoading>
+              <p-skeleton width="6rem" height="1.5rem" styleClass="mb-2"></p-skeleton>
+            </ng-template>
+          </span>
         </div>
       </div>
     </div>
     
     <div class="area-pendentes-assinados">
-        <button 
-          [class.active]="selectedButton === 'pendentes'" 
-          (click)="selectButton('pendentes')">
-          <span>Pendentes</span>
-        </button>
-        <button 
-          [class.active]="selectedButton === 'assinados'" 
-          (click)="selectButton('assinados')">
-          <span>Assinados</span>
-        </button>
-      </div>
+      <button 
+        [class.active]="selectedButton === 'pendentes'" 
+        (click)="selectButton('pendentes')">
+        <span>Pendentes</span>
+      </button>
+      <button 
+        [class.active]="selectedButton === 'assinados'" 
+        (click)="selectButton('assinados')">
+        <span>Assinados</span>
+      </button>
+    </div>
 
-      <div class="documentos">
-        <div *ngIf="selectedButton === 'pendentes'">
-
-          @for (item of dadosCliente; track item; let i = $index) {
-
-            <!-- @if () {}  AQUI SERA A CONDICAO PARA OS DOCUMENTOS ASSINADOS E NAO ASSINADOS-->
-
-          <div class="documento-card">
-            <div class="documento-info">
-
-              <div  style="display: flex; flex-direction: column;">
+    <div class="documentos">
+      <div *ngIf="selectedButton === 'pendentes'">
+        <ng-container *ngIf="!isLoading; else skeletonDocumentLoading">
+          <ng-container *ngFor="let item of dadosCliente; let i = index">
+            <div class="documento-card">
+              <div class="documento-info">
+                <div style="display: flex; flex-direction: column;">
                   <h1>Nº documento</h1>
                   <span>{{item.apolice[0].apolice_id}}</span>
-              </div>
-
-              <div style="display: flex; flex-direction: column;">
+                </div>
+                <div style="display: flex; flex-direction: column;">
                   <h1>Assunto</h1>
                   <span>{{getFirstName(item.apolice[0].parceiro)}}</span>
+                </div>
               </div>
-
+              <button class="assinar-btn" routerLink="/contrato/{{item.apolice[0].apolice_id}}">
+                <img src="../../../assets/icon-assinatura.svg" alt=""> Assinar
+              </button>
             </div>
-            <button class="assinar-btn"  routerLink="/contrato/{{item.apolice[0].apolice_id}}"><img src="../../../assets/icon-assinatura.svg" alt=""> Assinar</button>
+          </ng-container>
+        </ng-container>
+        <ng-template #skeletonDocumentLoading>
+          <div class="documento-card">
+            <div class="documento-info">
+              <div style="display: flex; flex-direction: column;">
+                <p-skeleton width="8rem" height="1.5rem" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="6rem" height="1.5rem" styleClass="mb-2"></p-skeleton>
+              </div>
+              <div style="display: flex; flex-direction: column;">
+                <p-skeleton width="2rem" height="1.5rem" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="10rem" height="1.5rem" styleClass="mb-2"></p-skeleton>
+              </div>
+            </div>
+            <p-skeleton width="10rem" height="6.5rem" styleClass="mb-2"></p-skeleton>
           </div>
-
-        }
-
-          
-        </div>
-        <div *ngIf="selectedButton === 'assinados'">
-            <div class="documento-card">
-                <div class="documento-info">
-    
-                  
-    
-                </div>
-                <button class="assinado-btn"><img style="width: 19px; height: 19px;" src="../../../assets/icon-assinatura1.png" alt=""> <p style="color: #15803D; ">Assinado</p></button>
-              </div>
-            <div class="documento-card">
-                <div class="documento-info">
-    
-                  <div  style="display: flex; flex-direction: column;">
-                      <h1>Nº documento</h1>
-                      <span>120540000</span>
-                  </div>
-    
-                  <div style="display: flex; flex-direction: column;">
-                      <h1>Assunto</h1>
-                      <span>Assunto do <br> documento</span>
-                  </div>
-    
-                </div>
-                <button class="assinado-btn"><img style="width: 19px; height: 19px;" src="../../../assets/icon-assinatura1.png" alt=""> <p style="color: #15803D; ">Assinado</p></button>
-              </div>
-        </div>
+        </ng-template>
       </div>
 
-
+      <!-- <div *ngIf="selectedButton === 'assinados'">
+        <ng-container *ngIf="!isLoading; else skeletonDocumentLoading">
+          <div class="documento-card" *ngFor="let item of dadosDetalhados; let i = index">
+            <div class="documento-info">
+              <div style="display: flex; flex-direction: column;">
+                <h1>Nº documento</h1>
+                <span>{{item.apolice_id}}</span>
+              </div>
+              <div style="display: flex; flex-direction: column;">
+                <h1>Assunto</h1>
+                <span>{{item.parceiro}}</span>
+              </div>
+            </div>
+            <button class="assinado-btn">
+              <img style="width: 19px; height: 19px;" src="../../../assets/icon-assinatura1.png" alt=""> 
+              <p style="color: #15803D;">Assinado</p>
+            </button>
+          </div>
+        </ng-container>
+      </div> -->
+    </div>
   </section>
 
-  <app-modal [show]="showModal" (close)="closeModal()">
-    <div style="position: relative; flex-direction: column; display: flex; justify-content: center; align-items: center; height: 100%;">
-        <div style=" height: 80%;" >
-            <figure class="figureModal" style="position: absolute;">
-            <img style="width: 50px; height: 50px;" src="../../../assets/signature@2x.png" alt="">
-            </figure>
-
-            <div style="display: flex; flex-direction: column; height: 100%; gap: 30px; justify-content: end;">
-              <h1  style="color: #1F2937; text-align: center; font-size: 24px; font-weight: bold;">Documento assinado <br> com sucesso</h1>
-              <button class="btn-docs">Ver documentos</button>
-            </div>
-
-        </div>
-    </div>
-  </app-modal>
-
-
-
-
-  
+  <app-modal [show]="showModal" (close)="closeModal()"></app-modal>
 </div>
