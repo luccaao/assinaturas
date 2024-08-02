@@ -42,11 +42,13 @@ export class LoginCPFComponent {
       this.auth.apolices(cpfControl.value).subscribe({
         next: (data) => {
           console.log(data.status);
-          // this.router.navigate(['/gestao-assinatura']);
+          
           this.isLoading = false; // Desativa o estado de loading
           if(data.status === false) {
             this.errorMessage = 'Parece que esse CPF não consta no nosso Banco de Dados!';
 
+          } else {
+            this.router.navigate(['/gestao-assinatura']);
           }
         },
        
