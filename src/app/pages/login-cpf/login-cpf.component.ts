@@ -14,6 +14,9 @@ import { AutenticacaoService } from '../../services/autenticacao.service';
 export class LoginCPFComponent {
   cpfForm: FormGroup;
   isInvalid: boolean = false; // Flag para controlar o estado de invalidez
+  isLoading: boolean = false;
+
+  errorMessage: string = '';
 
   constructor(private fb: FormBuilder, private router: Router, private auth: AutenticacaoService) {
     this.cpfForm = this.fb.group({
@@ -35,11 +38,19 @@ export class LoginCPFComponent {
     if (cpfControl && this.validarCPF(cpfControl.value.replace(/\D/g, ''))) {
       console.log('CPF válido:', cpfControl.value);
       this.isInvalid = false;
-      this.auth.apolices(cpfControl.value).subscribe(data => {
-        
-        this.router.navigate(['/gestao-assinatura']);
-      });
+      this.isLoading = true; // Ativa o estado de loading
+      this.auth.apolices(cpfControl.value).subscribe({
+        next: (data) => {
+          console.log(data.status);
+          // this.router.navigate(['/gestao-assinatura']);
+          this.isLoading = false; // Desativa o estado de loading
+          if(data.status === false) {
+            this.errorMessage = 'Parece que esse CPF não consta no nosso Banco de Dados!';
 
+          }
+        },
+       
+      });
     } else {
       this.setInvalidState();
     }
@@ -48,7 +59,7 @@ export class LoginCPFComponent {
   onBlur() {
     const cpfControl = this.cpfForm.get('cpf');
     if (cpfControl) {
-      const cpfValue = cpfControl.value.replace(/\D/g, ''); 
+      const cpfValue = cpfControl.value.replace(/\D/g, '');
       if (!this.validarCPF(cpfValue)) {
         this.setInvalidState();
       } else {
@@ -61,7 +72,7 @@ export class LoginCPFComponent {
     const cpfControl = this.cpfForm.get('cpf');
     if (cpfControl && cpfControl.value === 'Entrada Inválida') {
       cpfControl.setValue('');
-      this.isInvalid = false; 
+      this.isInvalid = false;
     }
   }
 
@@ -69,7 +80,7 @@ export class LoginCPFComponent {
     const cpfControl = this.cpfForm.get('cpf');
     if (cpfControl) {
       cpfControl.setValue('Entrada Inválida');
-      this.isInvalid = true; 
+      this.isInvalid = true;
     }
   }
 
@@ -116,6 +127,5 @@ export class LoginCPFComponent {
   get cpf() {
     return this.cpfForm.get('cpf');
   }
-
 
 }

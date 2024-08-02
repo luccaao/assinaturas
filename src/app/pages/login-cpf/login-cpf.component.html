@@ -17,9 +17,15 @@
             [class.invalid]="isInvalid"
           />
           <i *ngIf="isInvalid" class="fas fa-exclamation-circle error-icon"></i>
+
         </div>
+        <span class="erro">{{errorMessage}}</span>
       </div>
-      <button type="submit" [disabled]="cpf?.invalid">Buscar</button>
+      <div *ngIf="isLoading" class="loading-indicator">
+        <div class="spinner"></div>
+      </div>
+      
+      <button type="submit" [disabled]="cpf?.invalid || isLoading">Buscar</button>
     </form>
   </div>
 </section>

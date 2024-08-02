@@ -18,15 +18,7 @@ export class AutenticacaoService {
     return this.httpClient.get(this.KEY);
   }
 
-  loginCpf(cpf: string): Observable<any> {
-    const headers = new HttpHeaders({
-      'APIKEY': '34495f86cd30ec51a8887dbc9cffe48b053871bf306aaf559c047726d0df480b'
-    });
-
-    return this.httpClient.get(`/api/info?doc=${cpf}&produto_parceiro_id=139`, { headers }).pipe(
-      catchError(this.handleError)
-    );
-  }
+ 
 
   produtos(): Observable<any> {
     //APIKEY

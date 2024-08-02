@@ -45,6 +45,7 @@
     .area-pendentes-assinados {
       background-color: #ffffff;
       height: 49px;
+      padding: 5px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -132,6 +133,7 @@
   
     .area-pendentes-assinados button.active::after {
       transform: translateX(0);
+      
     }
 
 
@@ -240,7 +242,7 @@
   }
 
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     .container {
       display: flex;
       justify-content: center;
@@ -255,23 +257,33 @@
   
     .card-container {
       margin-top: 5%;
-      height: 160px;
+      height: 190px;
       border-radius: 20px;
       display: flex;
-      justify-content: space-evenly;
-      align-items: center;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      position: relative;
     }
   
     figure {
       display: flex;
+      position: absolute;
+      left: 10px;
+      top: 10px;
       justify-content: center;
       align-items: center;
       background-color: #e5e7eb;
       border-radius: 50%;
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
       border: #9ca3af 3px solid;
+    }
+
+    figure img {
+      width: 50px;
+      height: 50px;
     }
   
     h1 {
@@ -279,9 +291,80 @@
       font-size: 16px;
       color: #475569;
     }
+
+    .card-container h1 {
+      font-size: 14px;
+    }
   
     .card-container span {
       color: #475569;
+      font-size: 12px;
+    }
+
+    .conteudo{
+      max-width: 300px;
+      width: 270px;
+    }
+
+    .documentos {
+      margin-top: 3%;
+     
+
+    }
+
+    .documento-info {
+      display: flex;
+      gap: 10px;
+      justify-content: start;
+      flex-direction: column;
+    }
+
+    .documentos h1 {
+      font-size: 14px;
+    }
+    .documentos .documento-info div span {
+
+      font-size: 12px;
+    }
+
+    .documentos  .assinar-btn{
+      background-color: #EFF6FF;
+      color: #00aeff;
+      border: #DAE5FB 1px solid;
+      border-radius: 10px;
+      display: flex;
+     
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 12px;
+      height: 39px;
+      width: 120px;
+      cursor: pointer;
+      position: relative;
+      transition: background-color 0.3s ease;
+    }
+
+
+    .documentos  .assinado-btn{
+      background-color: #F0FDF4;
+      color: #15803D;
+      border: #C4EBD2 1px solid;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      height: 39px;
+      font-size: 12px;
+      width: 120px;
+      cursor: pointer;
+      position: relative;
+      transition: background-color 0.3s ease;
+    }
+
+    .assinado-btn .assinado {
+      color: #15803D;
     }
     
 }

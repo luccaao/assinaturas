@@ -19,7 +19,7 @@ export const routes: Routes = [
         component: GestaoAssinaturaComponent
     },
     {
-        path: 'contrato',
+        path: 'contrato/:id',
         component: ContratoComponent
     }
 ];

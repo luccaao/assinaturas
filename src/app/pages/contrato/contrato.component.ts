@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../../shared/header/header.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-contrato',
@@ -10,6 +11,17 @@ import { HeaderComponent } from '../../shared/header/header.component';
 })
 export class ContratoComponent {
 
-  dynamicHeaderText = 'Contrato';
   caminho = '/gestao-assinatura';
+  contratoId: string | null = null;
+  dynamicHeaderText = 'Contrato Nº';
+  
+  constructor(private route : ActivatedRoute) {}
+
+  ngOnInit() {
+    console.log("TESTE");
+    
+    this.contratoId = this.route.snapshot.paramMap.get('id');
+    this.dynamicHeaderText = 'Contrato Nº ' + this.contratoId;
+    
+  }
 }
