@@ -31,7 +31,7 @@ export class AutenticacaoService {
   produtos(): Observable<any> {
     //APIKEY
     const headers  = new HttpHeaders({
-      'APIKEY': '7bba728174958305aafeee881cd5b239f650a0ef44cd312ab63ae31ef8c1cdd9'
+      'APIKEY': '61121cb4ab6e56009ec107466e0c13814d6b4343d783cdf7b6cd6fb95f01aba8'
     });
 
     return this.httpClient.get( `/api/produto`, { headers });
@@ -39,12 +39,12 @@ export class AutenticacaoService {
 
   apolices(cpf: string): Observable<any> {
     const headers = new HttpHeaders({
-        'APIKEY': '7bba728174958305aafeee881cd5b239f650a0ef44cd312ab63ae31ef8c1cdd9',
+        'APIKEY': '61121cb4ab6e56009ec107466e0c13814d6b4343d783cdf7b6cd6fb95f01aba8',
         'Content-Type': 'application/x-www-form-urlencoded'
     });
 
     const params = new HttpParams()
-        .set('apolice_status', '3')
+        .set('apolice_status', '1')
         .set('documento', cpf)
         .set('data_inicio', '2024-07-01')
         .set('data_fim', '2024-08-01');
